@@ -1,12 +1,17 @@
 diff --git a/survey/default.nix b/survey/default.nix
-index b28606c..ebf6894 100644
+index b28606c..c9c51cc 100644
 --- a/survey/default.nix
 +++ b/survey/default.nix
-@@ -1053,6 +1053,8 @@ let
+@@ -1053,6 +1053,13 @@ let
                    [ final.openssl ]
                    "--libs openssl";
  
-+              hledger = dontCheck super.hledger;
++                  hledger = 
++                  addStaticLinkerFlagsWithPkgconfig
++                  super.hledger
++                  [ final.hledger-lib ]
++                  "--libs hledger-lib"
++                  ;
 +
                xml-to-json =
                  addStaticLinkerFlagsWithPkgconfig
